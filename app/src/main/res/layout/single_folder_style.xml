@@ -19,7 +19,7 @@
         android:layout_width="140dp"
         android:layout_height="35dp"
         android:background="@color/cute_pink"
-        android:paddingTop="7dp"
+        android:paddingTop="3dp"
         android:text="Folder Name"
         android:textAlignment="center"
         android:textSize="20sp"

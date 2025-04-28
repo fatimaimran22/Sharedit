@@ -21,21 +21,32 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         addBtn=findViewById(R.id.addbtn)
+
+
         myList=findViewById(R.id.recyclerView)
-        val folderList= listOf(Folder(R.drawable.folder_icon,"Folder 1"),
-            Folder(R.drawable.folder_icon,"Folder 2"),
-            Folder(R.drawable.folder_icon,"Folder 3"),
-            Folder(R.drawable.folder_icon,"Folder 4"),
-            Folder(R.drawable.folder_icon,"Folder 5")
-        )
+        var folderList: MutableList<Folder> = mutableListOf()
 
-        val layoutManager = FlexboxLayoutManager(this)
-        layoutManager.flexDirection = FlexDirection.ROW
-        layoutManager.flexWrap = FlexWrap.WRAP  // ADD THIS LINE
-        layoutManager.justifyContent = JustifyContent.FLEX_START
+        addBtn.setOnClickListener {
+            // Create a new folder
+            val newFolder = Folder(R.drawable.folder_icon, "Folder ${folderList.size + 1}")
 
-        myList.layoutManager = layoutManager
-        myList.adapter = ItemAdapter(folderList)
+            // Add it to the list
+            folderList.add(newFolder)
+
+            // Notify the adapter that the data has changed
+            myList.adapter?.notifyItemInserted(folderList.size - 1)
+        }
+
+        folderList?.let {
+            val layoutManager = FlexboxLayoutManager(this)
+            layoutManager.flexDirection = FlexDirection.ROW
+            layoutManager.flexWrap = FlexWrap.WRAP
+            layoutManager.justifyContent = JustifyContent.FLEX_START
+
+            myList.layoutManager = layoutManager
+            myList.adapter = ItemAdapter(it)
+        }
+
 
     }
 }

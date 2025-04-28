@@ -8,16 +8,19 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemAdapter(private val itemList: List<Folder>):RecyclerView.Adapter<ItemViewHolder>(){
+class ItemAdapter(private var itemList: List<Folder>) : RecyclerView.Adapter<ItemViewHolder>() {
+
+    private var filteredList = itemList // Start with the original list
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(parent.context) .inflate(R.layout.single_folder_style, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.single_folder_style, parent, false)
         return ItemViewHolder(view)
     }
 
-    override fun getItemCount(): Int =itemList.size
+    override fun getItemCount(): Int = filteredList.size
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = itemList[position]
+        val item = filteredList[position]
         holder.folderPic.setImageResource(item.pic)
         holder.folderName.text = item.name
 
@@ -62,8 +65,17 @@ class ItemAdapter(private val itemList: List<Folder>):RecyclerView.Adapter<ItemV
 
         // Handle item click
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context,"Item Clicked "+position, Toast.LENGTH_LONG).show()
+            Toast.makeText(holder.itemView.context, "Item Clicked $position", Toast.LENGTH_LONG).show()
         }
     }
 
+    // Filter function that updates the list based on the search query
+    fun filter(query: String) {
+        filteredList = if (query.isEmpty()) {
+            itemList // No filter, return original list
+        } else {
+            itemList.filter { it.name.contains(query, ignoreCase = true) } // Filter the list
+        }
+        notifyDataSetChanged() // Notify the adapter that the data has changed
+    }
 }

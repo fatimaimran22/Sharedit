@@ -2,6 +2,7 @@ package com.example.sharedit
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.SearchView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,15 +17,19 @@ import com.google.android.flexbox.JustifyContent
 class MainActivity : AppCompatActivity() {
     lateinit var addBtn:Button
     lateinit var myList: RecyclerView
+    lateinit var search:SearchView
+    lateinit var adapter: ItemAdapter
+    lateinit var folderList: MutableList<Folder>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         addBtn=findViewById(R.id.addbtn)
-
-
+        search=findViewById(R.id.searchView)
         myList=findViewById(R.id.recyclerView)
-        var folderList: MutableList<Folder> = mutableListOf()
+
+        folderList = mutableListOf()
 
         addBtn.setOnClickListener {
             // Create a new folder
@@ -37,15 +42,27 @@ class MainActivity : AppCompatActivity() {
             myList.adapter?.notifyItemInserted(folderList.size - 1)
         }
 
-        folderList?.let {
-            val layoutManager = FlexboxLayoutManager(this)
-            layoutManager.flexDirection = FlexDirection.ROW
-            layoutManager.flexWrap = FlexWrap.WRAP
-            layoutManager.justifyContent = JustifyContent.FLEX_START
+        adapter = ItemAdapter(folderList)
 
-            myList.layoutManager = layoutManager
-            myList.adapter = ItemAdapter(it)
-        }
+        val layoutManager = FlexboxLayoutManager(this)
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.flexWrap = FlexWrap.WRAP
+        layoutManager.justifyContent = JustifyContent.FLEX_START
+
+        myList.layoutManager = layoutManager
+        myList.adapter = adapter
+
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter(query ?: "")
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter(newText ?: "")
+                return true
+            }
+        })
 
 
     }

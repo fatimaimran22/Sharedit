@@ -197,19 +197,90 @@ class ContentActivity : AppCompatActivity() {
                 val shareIntent = Intent(Intent.ACTION_SEND).apply {
                     type = contentResolver.getType(selectedFileUri!!) ?: "*/*"
                     putExtra(Intent.EXTRA_STREAM, selectedFileUri)
-                    setPackage("com.facebook.katana")
+                    putExtra(Intent.EXTRA_SUBJECT, "Sharing a file")
+                    putExtra(Intent.EXTRA_TEXT, "Please find the attached file.")
+                    type = "application/octet-stream" // Use generic type for email
                     addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
 
+                val chooser = Intent.createChooser(shareIntent, "Send email...")
                 if (shareIntent.resolveActivity(packageManager) != null) {
-                    startActivity(shareIntent)
+                    startActivity(chooser)
                 } else {
-                    Toast.makeText(this, "Facebook app is not installed.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "No Facebook app installed.", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "No file selected.", Toast.LENGTH_SHORT).show()
             }
         }
+
+        whatsappBtn.setOnClickListener {
+            if (selectedFileUri != null) {
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = contentResolver.getType(selectedFileUri!!) ?: "*/*"
+                    putExtra(Intent.EXTRA_STREAM, selectedFileUri)
+                    putExtra(Intent.EXTRA_SUBJECT, "Sharing a file")
+                    putExtra(Intent.EXTRA_TEXT, "Please find the attached file.")
+                    type = "application/octet-stream" // Use generic type for email
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                val chooser = Intent.createChooser(shareIntent, "Send email...")
+                if (shareIntent.resolveActivity(packageManager) != null) {
+                    startActivity(chooser)
+                } else {
+                    Toast.makeText(this, "No Whatsapp app installed.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "No file selected.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        emailBtn.setOnClickListener {
+            if (selectedFileUri != null) {
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = contentResolver.getType(selectedFileUri!!) ?: "*/*"
+                    putExtra(Intent.EXTRA_STREAM, selectedFileUri)
+                    putExtra(Intent.EXTRA_SUBJECT, "Sharing a file")
+                    putExtra(Intent.EXTRA_TEXT, "Please find the attached file.")
+                    type = "application/octet-stream" // Use generic type for email
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                val chooser = Intent.createChooser(shareIntent, "Send email...")
+                if (shareIntent.resolveActivity(packageManager) != null) {
+                    startActivity(chooser)
+                } else {
+                    Toast.makeText(this, "No email app installed.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "No file selected.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        bluetoothBtn.setOnClickListener {
+            if (selectedFileUri != null) {
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = contentResolver.getType(selectedFileUri!!) ?: "*/*"
+                    putExtra(Intent.EXTRA_STREAM, selectedFileUri)
+                    putExtra(Intent.EXTRA_SUBJECT, "Sharing a file")
+                    putExtra(Intent.EXTRA_TEXT, "Please find the attached file.")
+                    type = "application/octet-stream" // Use generic type for email
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                val chooser = Intent.createChooser(shareIntent, "Send email...")
+                if (shareIntent.resolveActivity(packageManager) != null) {
+                    startActivity(chooser)
+                } else {
+                    Toast.makeText(this, "No Whatsapp app installed.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "No file selected.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
 
     }
 

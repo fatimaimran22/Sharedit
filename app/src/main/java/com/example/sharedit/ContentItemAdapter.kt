@@ -93,4 +93,13 @@ class ContentItemAdapter (private var itemList: List<File>):RecyclerView.Adapter
         }
     }
 
+    fun filter(query: String) {
+        filteredList = if (query.isEmpty()) {
+            itemList // No filter, return original list
+        } else {
+            itemList.filter { it.name_d.contains(query, ignoreCase = true) } // Filter the list
+        }
+        notifyDataSetChanged() // Notify the adapter that the data has changed
+    }
+
 }

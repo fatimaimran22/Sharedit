@@ -30,7 +30,7 @@ class ContentActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView) // ID from your XML
         recyclerView.layoutManager = LinearLayoutManager(this)
-
+        search=findViewById(R.id.searchView)
         adapter = ContentItemAdapter(itemList)
         recyclerView.adapter = adapter
 
@@ -161,11 +161,19 @@ class ContentActivity : AppCompatActivity() {
             fileLauncher.launch(start)
         }
 
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter(query ?: "")
+                return true
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter(newText ?: "")
+                return true
+            }
+        })
 
     }
-
-
 
 
 }

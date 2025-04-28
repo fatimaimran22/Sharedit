@@ -22,6 +22,7 @@
         android:background="@color/cute_pink"
         android:paddingTop="3dp"
         android:text="Folder Name"
+        android:textColor="@color/black"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

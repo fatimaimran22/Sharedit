@@ -1,6 +1,7 @@
 package com.example.sharedit
 
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,5 +14,6 @@ class ItemViewHolder_Content(itemView: View) : RecyclerView.ViewHolder(itemView)
     val name_description: TextView = itemView.findViewById(R.id.name_description)
     val date_description: TextView = itemView.findViewById(R.id.date_description)
     val time_description: TextView = itemView.findViewById(R.id.time_description)
+    val editText = itemView.findViewById<EditText>(R.id.edit_name_description)
 
 }

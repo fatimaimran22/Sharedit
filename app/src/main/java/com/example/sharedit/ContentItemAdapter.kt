@@ -1,10 +1,13 @@
 package com.example.sharedit
 
 import android.content.ClipData
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -26,19 +29,64 @@ class ContentItemAdapter (private var itemList: List<File>):RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ItemViewHolder_Content, position: Int) {
         val item = filteredList[position]
-        if (item.pic.isNotEmpty()) {
-            // Use Glide to load the image from the URI or file path (String)
-            Glide.with(holder.itemView.context)
-                .load(item.pic)  // item.pic is a String (URI or file path)
-                .into(holder.folderPic)  // Assuming folderPic is an ImageView
-        }
-        holder.fileName.text = item.name
-        holder.fileDate.text = item.date.toString()
-        holder.fileTime.text = item.time.toString()
-        holder.name_description.text = item.name_d
-        holder.date_description.text = item.date_d.toString()
-        holder.time_description.text = item.time_d.toString()
 
+        if (item.pic.isNotEmpty()) {
+            Glide.with(holder.itemView.context)
+                .load(item.pic)
+                .into(holder.folderPic)
+        }
+
+        holder.fileName.text = item.name
+        holder.fileDate.text = item.date
+        holder.fileTime.text = item.time
+        holder.name_description.text = item.name_d
+        holder.date_description.text = item.date_d
+        holder.time_description.text = item.time_d
+
+        if (item.isEditing) {
+            holder.name_description.visibility = View.GONE
+            holder.editText.visibility = View.VISIBLE
+            holder.editText.setText(item.name_d)
+
+            holder.editText.requestFocus()
+
+            holder.editText.post {
+                val imm = holder.itemView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(holder.editText, InputMethodManager.SHOW_IMPLICIT)
+            }
+        } else {
+            holder.name_description.visibility = View.VISIBLE
+            holder.editText.visibility = View.GONE
+        }
+
+
+        holder.name_description.setOnClickListener {
+            item.isEditing = true
+            notifyItemChanged(position)
+        }
+
+        holder.editText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                item.name_d = holder.editText.text.toString()
+                item.isEditing = false
+                notifyItemChanged(position)
+
+                // Hide keyboard
+                val imm = holder.itemView.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(holder.editText.windowToken, 0)
+                true
+            } else {
+                false
+            }
+        }
+
+        holder.editText.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && item.isEditing) {
+                item.name_d = holder.editText.text.toString()
+                item.isEditing = false
+                notifyItemChanged(position)
+            }
+        }
     }
 
 }

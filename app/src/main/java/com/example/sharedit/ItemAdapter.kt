@@ -1,6 +1,7 @@
 package com.example.sharedit
 
 import android.content.ClipData
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +66,12 @@ class ItemAdapter(private var itemList: List<Folder>) : RecyclerView.Adapter<Ite
 
         // Handle item click
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Item Clicked $position", Toast.LENGTH_LONG).show()
+            // Create an intent to open ContentActivity
+            val intent = Intent(holder.itemView.context, ContentActivity::class.java)
+
+            // Optionally pass any data you need, like the folder ID or folder name
+            intent.putExtra("FOLDER_ID", position)  // You can pass the position or any unique identifier
+            holder.itemView.context.startActivity(intent)
         }
     }
 

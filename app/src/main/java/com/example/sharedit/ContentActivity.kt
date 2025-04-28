@@ -105,6 +105,36 @@ class ContentActivity : AppCompatActivity() {
             }
         }
 
+        // File launcher
+        val fileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val fileUri: Uri? = result.data?.data
+                fileUri?.let {
+                    val currentDate = Date()
+
+                    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+                    val timeFormat = SimpleDateFormat("HH:mm:ss")
+
+                    val dateString = dateFormat.format(currentDate)
+                    val timeString = timeFormat.format(currentDate)
+
+                    val newItem = File(
+                        pic = it.toString(), // Storing file Uri as string
+                        name = "Name: ",
+                        name_d = "File",
+                        date_d = dateString,
+                        time_d = timeString,
+                        date = "Date: ",
+                        time = "Time: "
+                    )
+
+                    itemList.add(newItem)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+
+
         val imp_image = findViewById<Button>(R.id.imp_images)
         imp_image .setOnClickListener {
             val start = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -117,6 +147,15 @@ class ContentActivity : AppCompatActivity() {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             captureImageLauncher.launch(cameraIntent)
         }
+
+        val imp_file = findViewById<Button>(R.id.imp_files)
+        imp_file.setOnClickListener {
+            val start = Intent(Intent.ACTION_GET_CONTENT)
+            start.type = "*/*" // allow any file type
+            start.addCategory(Intent.CATEGORY_OPENABLE) // only show openable files
+            fileLauncher.launch(start)
+        }
+
 
 
     }

@@ -54,7 +54,8 @@ class ContentActivity : AppCompatActivity() {
                         date_d = dateString,
                         time_d = timeString,
                         date = "Date: ",
-                        time = "Time: "
+                        time = "Time: ",
+                        isImage = true
                     )
 
                     itemList.add(newItem)
@@ -95,7 +96,8 @@ class ContentActivity : AppCompatActivity() {
                         date_d = dateString,
                         time_d = timeString,
                         date = "Date: ",
-                        time = "Time: "
+                        time = "Time: ",
+                        isImage = true
                     )
 
                     itemList.add(newItem)
@@ -117,6 +119,8 @@ class ContentActivity : AppCompatActivity() {
 
                     val dateString = dateFormat.format(currentDate)
                     val timeString = timeFormat.format(currentDate)
+                    val mimeType = contentResolver.getType(it)
+                    val isImage = mimeType?.startsWith("image/") == true
 
                     val newItem = File(
                         pic = it.toString(), // Storing file Uri as string
@@ -125,7 +129,8 @@ class ContentActivity : AppCompatActivity() {
                         date_d = dateString,
                         time_d = timeString,
                         date = "Date: ",
-                        time = "Time: "
+                        time = "Time: ",
+                        isImage = isImage
                     )
 
                     itemList.add(newItem)

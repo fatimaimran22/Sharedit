@@ -30,10 +30,14 @@ class ContentItemAdapter (private var itemList: List<File>):RecyclerView.Adapter
     override fun onBindViewHolder(holder: ItemViewHolder_Content, position: Int) {
         val item = filteredList[position]
 
-        if (item.pic.isNotEmpty()) {
+        if (item.isImage) {
+            // Use Glide to load the image from the URI or file path
             Glide.with(holder.itemView.context)
-                .load(item.pic)
-                .into(holder.folderPic)
+                .load(item.pic)  // item.pic should be a file path or URI
+                .into(holder.folderPic)  // Assuming folderPic is an ImageView in your layout
+        } else {
+            // Show folder icon for non-image files (e.g., documents)
+            holder.folderPic.setImageResource(R.drawable.folder_icon)  // Set the folder icon
         }
 
         holder.fileName.text = item.name

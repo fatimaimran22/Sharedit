@@ -8,5 +8,6 @@ data class File(
     var name_d: String,
     var date_d: String,
     var time_d: String,
-    var isEditing: Boolean = false
+    var isEditing: Boolean = false,
+    val isImage: Boolean = false
 )

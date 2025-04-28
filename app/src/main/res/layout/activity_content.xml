@@ -34,31 +34,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <Button
-        android:id="@+id/addbtn"
-        android:layout_width="66dp"
-        android:layout_height="62dp"
-        android:background="@drawable/addbtn"
-        android:text="+"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.918"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.947" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="376dp"
-        android:layout_height="541dp"
+        android:layout_width="357dp"
+        android:layout_height="460dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintVertical_bias="0.642" />
 
     <ImageButton
         android:id="@+id/fb"
@@ -79,13 +63,13 @@
         android:id="@+id/whatsapp"
         android:layout_width="65dp"
         android:layout_height="66dp"
+        android:backgroundTint="@color/white"
         android:contentDescription="Whatsapp Button"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintHorizontal_bias="0.349"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953"
         app:srcCompat="@drawable/whatsapp" />
@@ -94,14 +78,14 @@
         android:id="@+id/bluetooth"
         android:layout_width="65dp"
         android:layout_height="66dp"
+        android:backgroundTint="@color/white"
         android:contentDescription="Bluetooth Button"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.661"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/white"
         app:layout_constraintVertical_bias="0.953"
         app:srcCompat="@drawable/bluetooth" />
 
@@ -109,16 +93,52 @@
         android:id="@+id/email"
         android:layout_width="65dp"
         android:layout_height="66dp"
+        android:backgroundTint="@color/white"
         android:contentDescription="Email Button"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.687"
+        app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953"
-        android:backgroundTint="@color/white"
         app:srcCompat="@drawable/email" />
+
+    <Button
+        android:id="@+id/imp_files"
+        android:layout_width="101dp"
+        android:layout_height="69dp"
+        android:text="Import Files"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.892" />
+
+    <Button
+        android:id="@+id/capture_images"
+        android:layout_width="103dp"
+        android:layout_height="69dp"
+        android:text="Capture Image"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toEndOf="@+id/imp_images"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894" />
+
+    <Button
+        android:id="@+id/imp_images"
+        android:layout_width="101dp"
+        android:layout_height="69dp"
+        android:text="Import Image"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintStart_toEndOf="@+id/imp_files"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.895" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

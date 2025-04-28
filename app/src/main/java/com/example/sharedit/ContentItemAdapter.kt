@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import java.util.Date
 import java.text.SimpleDateFormat
 
@@ -25,7 +26,12 @@ class ContentItemAdapter (private var itemList: List<File>):RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ItemViewHolder_Content, position: Int) {
         val item = filteredList[position]
-        holder.folderPic.setImageResource(item.pic)
+        if (item.pic.isNotEmpty()) {
+            // Use Glide to load the image from the URI or file path (String)
+            Glide.with(holder.itemView.context)
+                .load(item.pic)  // item.pic is a String (URI or file path)
+                .into(holder.folderPic)  // Assuming folderPic is an ImageView
+        }
         holder.fileName.text = item.name
         holder.fileDate.text = item.date.toString()
         holder.fileTime.text = item.time.toString()
@@ -34,6 +40,5 @@ class ContentItemAdapter (private var itemList: List<File>):RecyclerView.Adapter
         holder.time_description.text = item.time_d.toString()
 
     }
-
 
 }

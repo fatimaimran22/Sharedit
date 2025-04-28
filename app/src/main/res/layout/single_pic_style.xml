@@ -20,21 +20,22 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/image" />
 
+
     <TextView
         android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="176dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="136dp"
         android:text="Name:"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.357"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/img"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/name_description"
@@ -69,29 +70,30 @@
         android:id="@+id/date_description"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_marginEnd="56dp"
         android:inputType="date"
         android:text="Date    "
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.297"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/date"
         app:layout_constraintTop_toBottomOf="@+id/name_description"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.04" />
 
     <TextView
         android:id="@+id/time_description"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginEnd="56dp"
         android:inputType="time"
         android:text="Time   "
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintHorizontal_bias="0.964"
         app:layout_constraintStart_toEndOf="@+id/time"
         app:layout_constraintTop_toBottomOf="@+id/date_description"
         app:layout_constraintVertical_bias="0.0" />
@@ -100,28 +102,28 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="176dp"
+        android:layout_marginEnd="128dp"
         android:text="Date:"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintHorizontal_bias="0.596"
         app:layout_constraintStart_toEndOf="@+id/img"
         app:layout_constraintTop_toBottomOf="@+id/Name"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="176dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="144dp"
         android:text="Time:"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toEndOf="@+id/img"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 

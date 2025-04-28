@@ -6,8 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +24,12 @@ class ContentActivity : AppCompatActivity() {
     lateinit var search:SearchView
     private val itemList = mutableListOf<File>() // Create a mutable list
 
+    lateinit var fbBtn:ImageButton
+    lateinit var whatsappBtn:ImageButton
+    lateinit var bluetoothBtn:ImageButton
+    lateinit var emailBtn:ImageButton
+    private var selectedFileUri: Uri? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_content)
@@ -30,9 +38,20 @@ class ContentActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView) // ID from your XML
         recyclerView.layoutManager = LinearLayoutManager(this)
+
         search=findViewById(R.id.searchView)
+        fbBtn=findViewById(R.id.fb)
+        whatsappBtn=findViewById(R.id.whatsapp)
+        bluetoothBtn=findViewById(R.id.bluetooth)
+        emailBtn=findViewById(R.id.email)
+
         adapter = ContentItemAdapter(itemList)
         recyclerView.adapter = adapter
+
+        adapter.onItemLongClick = { fileItem ->
+            selectedFileUri = Uri.parse(fileItem.pic)
+            Toast.makeText(this, "File selected for sharing.", Toast.LENGTH_SHORT).show()
+        }
 
         val imageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 result->
@@ -172,6 +191,25 @@ class ContentActivity : AppCompatActivity() {
                 return true
             }
         })
+
+        fbBtn.setOnClickListener {
+            if (selectedFileUri != null) {
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = contentResolver.getType(selectedFileUri!!) ?: "*/*"
+                    putExtra(Intent.EXTRA_STREAM, selectedFileUri)
+                    setPackage("com.facebook.katana")
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                if (shareIntent.resolveActivity(packageManager) != null) {
+                    startActivity(shareIntent)
+                } else {
+                    Toast.makeText(this, "Facebook app is not installed.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "No file selected.", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 

@@ -19,6 +19,8 @@ class ContentItemAdapter (private var itemList: List<File>):RecyclerView.Adapter
 
     private var filteredList = itemList
     val currentDate = Date()
+    var onItemLongClick: ((File) -> Unit)? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder_Content {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.single_pic_style, parent, false)
@@ -90,6 +92,11 @@ class ContentItemAdapter (private var itemList: List<File>):RecyclerView.Adapter
                 item.isEditing = false
                 notifyItemChanged(position)
             }
+        }
+
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick?.invoke(item)
+            true
         }
     }
 

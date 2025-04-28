@@ -26,4 +26,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/folderPic" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="140dp"
+        android:layout_height="35dp"
+        android:visibility="gone"
+        android:background="@color/cute_pink"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:paddingTop="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/folderPic"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
